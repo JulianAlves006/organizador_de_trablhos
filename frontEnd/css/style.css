@@ -1,0 +1,9 @@
+section{
+    margin: 5%;
+    border: solid;
+    max-width: 90%;
+}
+
+header {
+    display: flex;
+}
