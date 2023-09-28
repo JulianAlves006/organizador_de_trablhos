@@ -27,7 +27,7 @@
             <li><a href="cadastro/cadastro.php" class="a" title="Cadastro">Cadastro</a></li>
         <?php }else{?>
             <li><a href="./index.php" class="a" title="Home">Home</a></li>
-            <li><a href="" class="a" title="Name"><?php echo $_SESSION['name'];?></a></li>
+            <li><a href="./principal/principal.php" class="a" title="Name"><?php echo $_SESSION['name'];?></a></li>
             <li><a href="./logout.php" class="a">Logout</a></li>
         <?php }?>
         </ul>

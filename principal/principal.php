@@ -16,6 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Organizador</title>
     <link rel="stylesheet" href="../frontEnd/css/style.css">
+    <link rel="stylesheet" href="../frontEnd/css/principal.css">
 </head>
 <body>
     <?php 
@@ -44,7 +45,8 @@
 
     </header>
     <section>
-        <h1>Ola <?php echo $nome?></h1>
+        <h1>Olá <?php echo $nome?> como vai você?? Gostaria de dar uma olhada em suas atividades próximas?? Ou talvez adicionar uma nova?</h1>
+        <a href="../adicionar/adicionar.php"><button class="btn">Adicionar</button></a>
     </section>        
     <?php }else{?>
         <section>
