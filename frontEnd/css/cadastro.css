@@ -95,3 +95,15 @@ body {
     background-color: #ff0676;
 
 }
+
+img{
+    position: absolute;
+    width: 4.5%;
+    left: 1%;
+    top: 1%;
+    border-radius: 30%;
+}
+
+img:hover{
+    background-color: #0156804f;
+}

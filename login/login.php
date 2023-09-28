@@ -12,6 +12,7 @@
 </head>
 <body>
     <div class="page">
+        <a href="../index.php"><img src="../imgs/homeIcon.png" alt="home"></a>
         <form method="POST" action="login.php" class="formLogin">
             <h1>Login</h1>
             <p>Digite os seus dados de acesso no campo abaixo.</p>
@@ -19,7 +20,7 @@
             <input type="email" name="email" placeholder="Digite seu e-mail" autofocus="true" required/>
             <label for="password">Senha</label>
             <input type="password" placeholder="Digite sua senha" name="senha" required/>
-            <a href="">Esqueci minha senha</a>
+            <a href="">Esqueci minha senha</a> <a href="../cadastro/cadastro.php">Não tenho cadastro</a>
             <input type="submit" value="Acessar" class="btn" />
         </form>
     </div>

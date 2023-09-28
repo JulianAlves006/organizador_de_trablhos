@@ -1,3 +1,7 @@
+<?php 
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,11 +21,15 @@
         <label class="mobile-icon" for="mobile-btn"><span class="hamburguer"></span></label>
         
         <ul class="nav">
-
-        <li><a href="" class="a" title="Home">Home</a></li>
-        <li><a href="login/login.php" class="a" title="Login">Login</a></li>
-        <li><a href="cadastro/cadastro.php" class="a" title="Cadastro">Cadastro</a></li>
-        
+        <?php if(isset($_SESSION['name']) == null){?>
+            <li><a href="" class="a" title="Home">Home</a></li>
+            <li><a href="login/login.php" class="a" title="Login">Login</a></li>
+            <li><a href="cadastro/cadastro.php" class="a" title="Cadastro">Cadastro</a></li>
+        <?php }else{?>
+            <li><a href="./index.php" class="a" title="Home">Home</a></li>
+            <li><a href="" class="a" title="Name"><?php echo $_SESSION['name'];?></a></li>
+            <li><a href="./logout.php" class="a">Logout</a></li>
+        <?php }?>
         </ul>
 
     </div><!--content-->

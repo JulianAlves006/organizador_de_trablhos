@@ -2,15 +2,11 @@
     session_start();
     $id = isset($_SESSION['user']) ? $_SESSION['user'] : null;
 
-    if($id == null){
-        die("Algo deu errado");
-    }
+    
 
     $nome = isset($_SESSION['name']) ? $_SESSION['name'] : null;
 
-    if($nome == null){
-        die("Algo deu errado");
-    }
+    
 ?>
 
 <!DOCTYPE html>
@@ -19,8 +15,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Organizador</title>
+    <link rel="stylesheet" href="../frontEnd/css/style.css">
 </head>
 <body>
-    <h1>Ola <?php echo $nome?></h1>
+    <?php 
+        if(isset($_SESSION['name']) != null){
+    ?>
+    <header class="header">
+
+    <div class="content">
+
+    <ul class="logo"><li class="logo"><a href="./principal.php" class="logo">Organizador de Trabalhos</a></li></ul>
+        
+        <input class="mobile-btn" type="checkbox" id="mobile-btn" />
+        <label class="mobile-icon" for="mobile-btn"><span class="hamburguer"></span></label>
+        
+        <ul class="nav">
+
+        
+
+        <li><a href="../index.php" class="a" title="Home">Home</a></li>
+        <li><a href="" class="a" title="Name"><?php echo $nome;?></a></li>
+        <li><a href="../logout.php" class="a">Logout</a></li>
+        
+        </ul>
+
+    </div>
+
+    </header>
+    <section>
+        <h1>Ola <?php echo $nome?></h1>
+    </section>        
+    <?php }else{?>
+        <section>
+            <h1>Você não esta logado!!</h1>
+            <a href="../login/login.php">Voltar ao login</a>
+        </section>
+    <?php }?>
 </body>
 </html>

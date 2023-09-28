@@ -13,6 +13,7 @@
 </head>
 <body>
     <div class="page">
+        <a href="../index.php"><img src="../imgs/homeIcon.png" alt="home"></a>
         <form method="POST" action="cadastro.php" class="formcadastro">
             <h1>Cadastro</h1>
             <p>Digite os seus dados nos campos abaixo.</p>
