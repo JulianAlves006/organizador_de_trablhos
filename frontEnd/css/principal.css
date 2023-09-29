@@ -23,3 +23,53 @@
     transform: scale(1.05);
     background-color: #ff0676;
 }
+
+.calendario {
+    background-color: #fff;
+    text-align: center;
+    max-width: 90%;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+header {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    width: 120px;
+    height: 120px;
+    border: 1px solid #ddd;
+    text-align: left;
+    vertical-align: top;
+    position: relative;
+}
+
+.th-day {
+    background-color: #f2f2f2;
+}
+
+.td-day {
+    background-color: #fff;
+    cursor: pointer; /* Adicione um cursor ao passar o mouse sobre os dias */
+}
+
+.td-day:hover {
+    background-color: #e0e0e0;
+}
+
+/* Classe para adicionar texto no quadradinho do dia */
+.texto-dia {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    color: #333;
+}

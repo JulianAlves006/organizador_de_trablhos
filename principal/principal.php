@@ -1,12 +1,8 @@
 <?php 
+    include "../connection/conexao.php";
     session_start();
     $id = isset($_SESSION['user']) ? $_SESSION['user'] : null;
-
-    
-
     $nome = isset($_SESSION['name']) ? $_SESSION['name'] : null;
-
-    
 ?>
 
 <!DOCTYPE html>
@@ -47,6 +43,75 @@
     <section>
         <h1>Olá <?php echo $nome?> como vai você?? Gostaria de dar uma olhada em suas atividades próximas?? Ou talvez adicionar uma nova?</h1>
         <a href="../adicionar/adicionar.php"><button class="btn">Adicionar</button></a>
+        <div class="calendario">
+            <?php
+                $sql="SELECT * FROM atividades WHERE id_usuario = $id";
+
+                // Obtém o ano e o mês atuais
+                $anoAtual = date("Y");
+                $mesAtual = date("n");
+
+                // Nomes dos meses
+                $nomesDosMeses = [
+                    "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+                    "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+                ];
+
+                // Número de dias em cada mês
+                $diasNoMes = cal_days_in_month(CAL_GREGORIAN, $mesAtual, $anoAtual);
+
+                // Primeiro dia do mês
+                $primeiroDiaDoMes = date("N", strtotime("$anoAtual-$mesAtual-01"));
+
+                // Cabeçalho do calendário
+                echo "<h1>{$nomesDosMeses[$mesAtual - 1]} $anoAtual</h1>";
+
+                // Tabela do calendário
+                echo "<table border='1'>";
+                echo "<tr>";
+                echo "<th>Domingo</th>";
+                echo "<th>Segunda</th>";
+                echo "<th>Terça</th>";
+                echo "<th>Quarta</th>";
+                echo "<th>Quinta</th>";
+                echo "<th>Sexta</th>";
+                echo "<th>Sábado</th>";
+                echo "</tr>";
+
+                // Inicia o contador de dia da semana
+                $diaDaSemana = 1;
+
+                // Preenche as células vazias até o primeiro dia do mês
+                echo "<tr>";
+                for ($i = 1; $i < $primeiroDiaDoMes; $i++) {
+                    echo "<td></td>";
+                    $diaDaSemana++;
+                }
+
+                // Loop para criar as células do calendário
+                for ($dia = 1; $dia <= $diasNoMes; $dia++) {
+                    echo "<td class='td-day'>$dia <div class='texto-dia'>Reunião</div></td>";
+
+                    if ($diaDaSemana == 7) {
+                        echo "</tr>";
+                        if ($dia != $diasNoMes) {
+                            echo "<tr>";
+                        }
+                        $diaDaSemana = 1;
+                    } else {
+                        $diaDaSemana++;
+                    }
+                }
+
+                // Preenche as células vazias restantes
+                while ($diaDaSemana <= 7) {
+                    echo "<td></td>";
+                    $diaDaSemana++;
+                }
+
+                echo "</table>";
+            ?>
+        </div>
     </section>        
     <?php }else{?>
         <section>
