@@ -42,13 +42,23 @@ table {
     border-collapse: collapse;
 }
 
-th, td {
+td {
     width: 120px;
     height: 120px;
     border: 1px solid #ddd;
     text-align: left;
     vertical-align: top;
     position: relative;
+}
+
+th{
+    width: 120px;
+    height: 120px;
+    border: 1px solid #ddd;
+    text-align: center;
+    vertical-align: center;
+    position: relative;
+    font-size: larger;
 }
 
 .th-day {
@@ -72,4 +82,12 @@ th, td {
     transform: translate(-50%, -50%);
     font-size: 12px;
     color: #333;
+}
+
+.current-day{
+    background-color: rgba(196, 0, 0, 0.767);
+}
+
+.current-day:hover{
+    background-color: rgba(189, 25, 25, 0.979);
 }

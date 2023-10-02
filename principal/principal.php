@@ -45,11 +45,20 @@
         <a href="../adicionar/adicionar.php"><button class="btn">Adicionar</button></a>
         <div class="calendario">
             <?php
-                $sql="SELECT * FROM atividades WHERE id_usuario = $id";
-
                 // Obtém o ano e o mês atuais
                 $anoAtual = date("Y");
                 $mesAtual = date("n");
+                $diaAtual = date("j"); // Dia atual
+
+                $sql = "SELECT dia, GROUP_CONCAT(materia) as materias, COUNT(*) as total FROM atividades WHERE id_usuario = $id AND mes = $mesAtual AND ano = $anoAtual GROUP BY dia";
+
+                $sql_query = $conexao->query($sql) or die('Algo deu errado!' . $conexao->error);
+                
+                // Obtém os dados do banco de dados e armazena em um array associativo
+                $dadosDoBanco = array();
+                while ($row = $sql_query->fetch_assoc()) {
+                    $dadosDoBanco[$row['dia']] = $row['materias'];
+                }
 
                 // Nomes dos meses
                 $nomesDosMeses = [
@@ -90,8 +99,27 @@
 
                 // Loop para criar as células do calendário
                 for ($dia = 1; $dia <= $diasNoMes; $dia++) {
-                    echo "<td class='td-day'>$dia <div class='texto-dia'>Reunião</div></td>";
-
+                    $cellClass = ($dia == $diaAtual) ? 'td-day current-day' : 'td-day';
+                    
+                    echo "<td class='$cellClass' onclick='redirecionarParaOutraPagina($dia)'>$dia";
+                    
+                    // Verifica se há atividades para este dia
+                    if (isset($dadosDoBanco[$dia])) {
+                        // Divide as matérias em um array
+                        $materias = explode(',', $dadosDoBanco[$dia]);
+                        $totalAtividades = count($materias);
+                        
+                        // Exibe a primeira atividade
+                        echo "<div class='texto-dia'>" . htmlspecialchars($materias[0]) . "</div>";
+                        
+                        // Exibe o número total de atividades ao lado da primeira atividade
+                        if ($totalAtividades > 1) {
+                            echo "<div class='total-atividades'>+{". $totalAtividades - 1 ."}</div>";
+                        }
+                    }
+                    
+                    echo "</td>";
+                    
                     if ($diaDaSemana == 7) {
                         echo "</tr>";
                         if ($dia != $diasNoMes) {
@@ -119,5 +147,17 @@
             <a href="../login/login.php">Voltar ao login</a>
         </section>
     <?php }?>
+
+    <script>
+        function redirecionarParaOutraPagina(dia) {
+            
+            var mes = <?php echo $mesAtual; ?>;
+            var ano = <?php echo $anoAtual; ?>;
+
+
+            var url = "../descricao/atividade.php?dia=" + dia + "&mes=" + mes + "&ano=" + ano;
+            window.location.href = url;
+        }
+    </script>
 </body>
 </html>
